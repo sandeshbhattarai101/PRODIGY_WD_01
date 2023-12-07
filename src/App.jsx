@@ -2,7 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import Home from './components/Home'
 import Navbar from './components/Navbar';
-
+import Contact from './components/Contact'
+import About from './components/About'
 import {
   BrowserRouter as Router,
   Route,
@@ -13,14 +14,33 @@ import {
 
 function App() {
 
+const [myStyle, setMyStyle]= useState({
+  color : "black",
+  backgroundColor : "white"
+})
+
+const handleToggle = ()=>{
+  if(myStyle.color == "black" ){
+    setMyStyle({color : "white",
+    backgroundColor : "black",
+ })
+  }
+  else{
+    setMyStyle({color : "black",
+    backgroundColor : "white",
+})
+  }
+}
+
+
   return (
     <>
     <Router>
-      <Navbar/>
+      <Navbar handleToggle = {handleToggle}  myStyle={myStyle}/>
       <Routes>
-        <Route exact path='/' element={<Home/>}/>
-
-      
+        <Route exact path='/' element={<Home handleToggle = {handleToggle}  myStyle={myStyle} />}/>
+        <Route exact path='/contact' element={<Contact handleToggle = {handleToggle}  myStyle={myStyle} />}/>
+        <Route exact path='/about' element={<About handleToggle = {handleToggle}  myStyle={myStyle} />}/>
       </Routes>
     </Router>
       
